@@ -4,8 +4,9 @@
 #include <random>
 #include <chrono>
 #include <iomanip>
+#include <locale>
 
-// Окружность: центр (x, y) и радиус r.
+// Структура для описания окружности.
 struct Circle {
     long double x;
     long double y;
@@ -18,83 +19,76 @@ struct Circle {
     }
 };
 
-// Функция для генерации случайного числа в диапазоне [min, max].
-long double random_double(long double min, long double max, std::mt19937 &gen, std::uniform_real_distribution<> &dist) {
-    return dist(gen) * (max - min) + min;
+bool is_point_inside_intersection(long double x, long double y, const Circle &c1, const Circle &c2, const Circle &c3) {
+   return c1.contains(x, y) && c2.contains(x, y) && c3.contains(x, y);
+}
+
+long double intersection_area(int n, long double scale, const Circle &c1, const Circle &c2, const Circle &c3) {
+    // Определение границ области генерации с учётом масштаба.
+    long double max_x = std::max(c1.x + c1.r, std::max(c2.x + c2.r, c3.x + c3.r)) * scale;
+    long double min_x = std::min(c1.x - c1.r, std::min(c2.x - c2.r, c3.x - c3.r)) * scale;
+    long double max_y = std::max(c1.y + c1.r, std::max(c2.y + c2.r, c3.y + c3.r)) * scale;
+    long double min_y = std::min(c1.y - c1.r, std::min(c2.y - c2.r, c3.y - c3.r)) * scale;
+
+    // Настройка генератора случайных чисел.
+    std::mt19937 generator(static_cast<unsigned long>(std::chrono::system_clock::now().time_since_epoch().count()));
+    std::uniform_real_distribution<long double> rndx(min_x, max_x);
+    std::uniform_real_distribution<long double> rndy(min_y, max_y);
+
+    int k = 0; // Счётчик точек внутри пересечения.
+
+    for(int i = 0; i < n; ++i){
+        long double x = rndx(generator);
+        long double y = rndy(generator);
+        if(is_point_inside_intersection(x, y, c1, c2, c3)){
+            k++;
+        }
+    }
+
+    long double area_rect = (max_x - min_x) * (max_y - min_y);
+    return (static_cast<long double>(k) / n) * area_rect;
 }
 
 int main() {
-    // Заданные окружности.
-    Circle c1 = {1.0, 1.0, 1.0};
-    Circle c2 = {1.5, 2.0, std::sqrt(5.0)/2.0};
-    Circle c3 = {2.0, 1.5, std::sqrt(5.0)/2.0};
+// Заданные окружности.
+Circle c1 = {1.0, 1.0, 1.0};
+Circle c2 = {1.5, 2.0, std::sqrt(5.0)/2.0};
+Circle c3 = {2.0, 1.5, std::sqrt(5.0)/2.0};
 
-    // Определение области генерации точек.
-    // Найдём минимальные и максимальные координаты, охватывающие все три окружности.
-    long double min_x = std::min(c1.x - c1.r, std::min(c2.x - c2.r, c3.x - c3.r));
-    long double max_x = std::max(c1.x + c1.r, std::max(c2.x + c2.r, c3.x + c3.r));
-    long double min_y = std::min(std::min(c1.y - c1.r, c2.y - c2.r), c3.y - c3.r);
-    long double max_y = std::max(std::max(c1.y + c1.r, c2.y + c2.r), c3.y + c3.r);
+// Точное значение площади пересечения.
+long double right_area = M_PI/4 + 5*asin(0.8)/4 - 1;
 
-    long double area_rect = (max_x - min_x) * (max_y - min_y);
+// Создание и открытие файлов для записи результатов.
+std::ofstream csv_n("result.csv");
+csv_n.imbue(std::locale::classic());
+csv_n << "n;area;area_diff\n";
 
-    // Настройка генератора случайных чисел.
-    std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
-    std::uniform_real_distribution<> dist(0.0, 1.0);
+       std::ofstream csv_scale("scale_result.csv");
 
-    // Точное значение площади пересечения.
-    long double exact_S = 0.25 * M_PI + 1.25 * std::asin(0.8) - 1.0;
+       // Установка локали "C" для использования точки в качестве десятичного разделителя.
+       csv_scale.imbue(std::locale::classic());
+       csv_scale << "scale;area;area_diff\n";
 
-    // Открытие файла для записи результатов.
-    std::ofstream outfile("results.csv");
-    if (!outfile.is_open()) {
-        std::cerr << "Ошибка при открытии файла для записи.\n";
-        return 1;
-    }
 
-    // Запись заголовка в файл.
-    outfile << "N;area;areaf;Relative deviation (%)\n";
+       for(int n = 100; n <= 100000; n += 500){
+           long double area = intersection_area(n, 1.0, c1, c2, c3);
+           long double diff = std::abs(area - right_area);
+           csv_n << n << ';' << std::fixed << std::setprecision(6) << area << ';' << diff << '\n';
+       }
 
-    // Вывод заголовка таблицы в консоль.
-    std::cout << std::setw(10) << "N"
-              << std::setw(20) << "area"
-              << std::setw(20) << "areaf"
-              << std::setw(25) << "Relative deviation (%)" << "\n";
+       // Варьирование масштаба области генерации.
+       for(long double scale = 1.0; scale < 10.0; scale += 0.1){
+           long double scaled_right_area = right_area * scale * scale;
+           long double area = intersection_area(1000000, scale, c1, c2, c3);
+           long double diff = std::abs(area - right_area); // Предполагаемое масштабирование площади.
+           csv_scale << std::fixed << std::setprecision(1) << scale
+                     << ';' << std::fixed << std::setprecision(6) << area
+                     << ';' << diff << '\n';
+       }
 
-    // Перебор значения N от 100 до 100000 с шагом 500.
-    for(int N = 100; N <= 100000; N += 500) {
-        int count = 0;
-        for(int i = 0; i < N; ++i) {
-            long double px = random_double(min_x, max_x, gen, dist);
-            long double py = random_double(min_y, max_y, gen, dist);
-            if(c1.contains(px, py) && c2.contains(px, py) && c3.contains(px, py)) {
-                count++;
-            }
-        }
-        long double estimated_S = ((long double)count / N) * area_rect;
-        long double difference = std::abs(estimated_S - exact_S);
-        long double relative_deviation = (difference / std::abs(exact_S)) * 100.0; // В процентах
+       csv_n.close();
+       csv_scale.close();
 
-        // Вывод данных в консоль.
-        std::cout << std::setw(10) << N
-                  << std::setw(20) << std::fixed << std::setprecision(6) << estimated_S
-                  << std::setw(20) << difference
-                  << std::setw(25) << relative_deviation << "\n";
 
-        // Запись данных в файл.
-        outfile << N << ";"
-                << std::fixed << std::setprecision(6) << estimated_S << ";"
-                << difference << ";"
-                << relative_deviation << "\n";
-    }
-
-    // Закрытие файла.
-    outfile.close();
-
-    // Вывод точного значения площади.
-
-    std::cout << "\nThe exact value of the intersection area: " << exact_S << "\n";
-    std::cout << "The results are recorded in the results.csv file\n";
-
-    return 0;
-}
+       return 0;
+   }
