@@ -4,7 +4,7 @@
 <h2 align="center">Графики:</h2>
 Алгоритмы я составил на языке Python в среде Visual Studio на основе данных, полученных алгоритмом Монте Карло: 
 
-[1](https://github.com/blackbarashka/HSE_Algosi/blob/main/result.csv) и [2](https://github.com/blackbarashka/HSE_Algosi/blob/main/scale_result.csv)
+[1](https://github.com/blackbarashka/HSE_Algosi/blob/main/result.csv)(площадь и отклонение при разных числах точек)и [2](https://github.com/blackbarashka/HSE_Algosi/blob/main/scale_result.csv)(площадь и отклонение при разных масштабах.)
 <h3 align="center">1.График зависимости относительного отклонения от количества точек</h3>
 
 ![area_vs_n](https://github.com/user-attachments/assets/7586ee56-2550-4f94-8bfe-9516ad342908)
