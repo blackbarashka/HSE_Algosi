@@ -63,32 +63,29 @@ std::ofstream csv_n("result.csv");
 csv_n.imbue(std::locale::classic());
 csv_n << "n;area;area_diff\n";
 
-       std::ofstream csv_scale("scale_result.csv");
+std::ofstream csv_scale("scale_result.csv");
 
-       // Установка локали "C" для использования точки в качестве десятичного разделителя.
-       csv_scale.imbue(std::locale::classic());
-       csv_scale << "scale;area;area_diff\n";
+// Установка локали "C" для использования точки в качестве десятичного разделителя.
+csv_scale.imbue(std::locale::classic());
+csv_scale << "scale;area;area_diff\n";
 
+for(int n = 100; n <= 100000; n += 500){
+    long double area = intersection_area(n, 1.0, c1, c2, c3);
+    long double diff = std::abs(area - right_area);
+    csv_n << n << ';' << std::fixed << std::setprecision(6) << area << ';' << diff << '\n';
+}
 
-       for(int n = 100; n <= 100000; n += 500){
-           long double area = intersection_area(n, 1.0, c1, c2, c3);
-           long double diff = std::abs(area - right_area);
-           csv_n << n << ';' << std::fixed << std::setprecision(6) << area << ';' << diff << '\n';
-       }
+// Варьирование масштаба области генерации.
+for(long double scale = 1.0; scale < 10.0; scale += 0.1){
+    long double scaled_right_area = right_area * scale * scale;
+    long double area = intersection_area(1000000, scale, c1, c2, c3);
+    long double diff = std::abs(area - right_area); // Предполагаемое масштабирование площади.
+    csv_scale << std::fixed << std::setprecision(1) << scale << ';' << std::fixed << std::setprecision(6) << area << ';' << diff << '\n';
+}
 
-       // Варьирование масштаба области генерации.
-       for(long double scale = 1.0; scale < 10.0; scale += 0.1){
-           long double scaled_right_area = right_area * scale * scale;
-           long double area = intersection_area(1000000, scale, c1, c2, c3);
-           long double diff = std::abs(area - right_area); // Предполагаемое масштабирование площади.
-           csv_scale << std::fixed << std::setprecision(1) << scale
-                     << ';' << std::fixed << std::setprecision(6) << area
-                     << ';' << diff << '\n';
-       }
-
-       csv_n.close();
-       csv_scale.close();
+csv_n.close();
+csv_scale.close();
 
 
-       return 0;
-   }
+return 0;
+}
