@@ -1,5 +1,6 @@
 # SET3/A1
 Алгоритм Монте Карло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). 
+ID посылки A1i - 293138170
 
 <h2 align="center">Графики:</h2>
 Алгоритмы я составил на языке Python в среде Visual Studio на основе данных, полученных алгоритмом Монте Карло: 
