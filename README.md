@@ -1,7 +1,8 @@
 # SET3/A1
-Алгоритм Монте Монтекарло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). 
+Алгоритм Монте Карло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). 
 
-Графики:
+<h2 align="center">Графики:</h2>
+Алгоритмы я составил на языке Python на основе данных, полученных алгоритмом Монте Карло.
 <h3 align="center">1.График зависимости относительного отклонения от количества точек</h3>
 
 ![area_vs_n](https://github.com/user-attachments/assets/7586ee56-2550-4f94-8bfe-9516ad342908)
