@@ -1,4 +1,4 @@
-# HSE_Algosi
+# SET3/A1
 Алгоритм Монте Монтекарло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). 
 
 Графики:
@@ -11,5 +11,5 @@
 3.Зависимость площади от масштаба
 ![area_vs_scale](https://github.com/user-attachments/assets/f9275fe5-5d72-4aa8-89b3-247a4c3fe6ea)
 
-4.Разница между правильным и предсказанным значением площади при изменении масштаба
+<h3 align="center">4.Разница между правильным и предсказанным значением площади при изменении масштаба</h3>
 ![diff_vs_scale](https://github.com/user-attachments/assets/bfc308ea-65a8-4fce-a9d4-c6d3fe827143)
