@@ -1,5 +1,5 @@
 # SET3/A1
-Алгоритм Монте Карло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). 
+Алгоритм Монте Карло - [здесь](https://github.com/blackbarashka/HSE_Algosi/blob/main/A1.cpp). <\n>
 ID посылки A1i - 293138170
 
 <h2 align="center">Графики:</h2>
