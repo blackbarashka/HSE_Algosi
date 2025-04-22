@@ -1,0 +1,3 @@
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P6Splay/cmake-build-debug/CMakeFiles/P6Splay.dir
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P6Splay/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P6Splay/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P4RBtree/cmake-build-debug/CMakeFiles/P4RBtree.dir
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P4RBtree/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/umaha/CLionProjects/a/Algoritms2/set4/P4RBtree/cmake-build-debug/CMakeFiles/rebuild_cache.dir
