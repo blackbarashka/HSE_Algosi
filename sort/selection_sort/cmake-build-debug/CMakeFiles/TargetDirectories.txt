@@ -1,0 +1,3 @@
+C:/Users/umaha/CLionProjects/sort/selection_sort/cmake-build-debug/CMakeFiles/selection_sort.dir
+C:/Users/umaha/CLionProjects/sort/selection_sort/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/umaha/CLionProjects/sort/selection_sort/cmake-build-debug/CMakeFiles/rebuild_cache.dir
