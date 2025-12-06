@@ -25,7 +25,8 @@
 - Размер образа оптимизирован за счет удаления build-зависимостей из финального образа
 - Проверка размера: `docker images reading-list-app`
 
-![alt text](image.png)
+<img width="707" height="762" alt="image" src="https://github.com/user-attachments/assets/4e768a68-ef74-4423-b5a4-f588f55bd820" />
+
 
 Dockerfile оптимизирован для продакшн-использования с минимальной базой, кэш-слоями и безопасной конфигурацией.
 
@@ -46,7 +47,7 @@ Dockerfile оптимизирован для продакшн-использов
 - Приложение доступно по адресу: http://localhost:8000
 - Документация API: http://localhost:8000/docs
 
-![alt text](image-1.png)
+<img width="756" height="318" alt="image" src="https://github.com/user-attachments/assets/aabc1a9b-adf9-4532-a548-cd4d96d6b7ae" />
 
 Compose описывает реальное приложение с настройками окружения, healthcheck и политикой перезапуска.
 
@@ -68,9 +69,9 @@ Compose описывает реальное приложение с настро
 - CI/CD pipeline собирает Docker-образ (см. `.github/workflows/ci.yml`)
 - API доступен и функционален: http://localhost:8000/docs
 
-![alt text](image-2.png)
+<img width="580" height="134" alt="image" src="https://github.com/user-attachments/assets/c99efff6-a901-4bca-b215-c7d0f5a0d577" />
 
-![alt text](image-3.png)
+<img width="1581" height="866" alt="image" src="https://github.com/user-attachments/assets/d3e16ff4-16f0-4951-a3d9-808a63eac7ec" />
 
 Собственный сервис контейнеризирован, запускается через Docker Compose, доступен по HTTP и интегрирован с CI/CD.
 
@@ -85,7 +86,7 @@ Compose описывает реальное приложение с настро
 - Unit-тесты запускаются через pytest
 - Настроена матрица для тестирования на нескольких версиях Python: 3.11 и 3.12
 
-    ![alt text](image-4.png)
+    <img width="367" height="243" alt="image" src="https://github.com/user-attachments/assets/f3dbc9b4-f0b8-436d-93c7-05b9871a83cc" />
 - Настроена матрица для тестирования на разных операционных системах (ubuntu-latest)
 - Линтинг и форматирование: ruff, black, isort
 - Pre-commit проверки запускаются в CI
@@ -113,9 +114,9 @@ Compose описывает реальное приложение с настро
 **Доказательства:**
 - Файл `.github/workflows/ci.yml`:
   - Настройка `concurrency`:
-  ![alt text](image-5.png)
+  <img width="332" height="52" alt="image" src="https://github.com/user-attachments/assets/be27c543-33e9-42e3-8aa8-58d55b753e2c" />
   - Кэширование pip:
-  ![alt text](image-6.png)
+  <img width="656" height="135" alt="image" src="https://github.com/user-attachments/assets/63f24f56-8469-49f6-ab4f-00f3e6f348d7" />
   - Кэширование Docker-образов
 - Кэш ускоряет сборку при повторных запусках
 
@@ -135,7 +136,8 @@ Compose описывает реальное приложение с настро
 **Доказательства:**
 - Файл `.github/workflows/ci.yml`:
   - Использование секретов
-  ![alt text](image-7.png)
+  <img width="453" height="80" alt="image" src="https://github.com/user-attachments/assets/60e7766e-57c3-4e9b-9653-a3a74c79e1af" />
+
 
 
 Настроены секреты для своего окружения (Railway, staging) с разграничением ролей/окружений, настроен secret scanning.
@@ -153,9 +155,11 @@ Compose описывает реальное приложение с настро
 **Доказательства:**
 - Файл `.github/workflows/ci.yml`:
   - Загрузка test reports
-  ![alt text](image-8.png)
+  <img width="577" height="70" alt="image" src="https://github.com/user-attachments/assets/ab98ba7f-bb3d-42ed-af6f-7e0d92718f57" />
+
   - Загрузка Docker image
-  ![alt text](image-9.png)
+  <img width="434" height="190" alt="image" src="https://github.com/user-attachments/assets/5363cc6e-5242-4d1e-bb70-93c1abb96a4f" />
+
 
 Артефакты релевантны проекту: Docker-образ, HTML-отчеты тестов, отчеты безопасности; используются при релизе.
 
@@ -173,9 +177,10 @@ Compose описывает реальное приложение с настро
 **Доказательства:**
 - Файл `.github/workflows/ci.yml`:
   - Job `deploy-staging` с mock deployment
-  ![alt text](image-10.png)
+  <img width="530" height="391" alt="image" src="https://github.com/user-attachments/assets/d741d58c-9569-47f6-8284-777890d8576e" />
   - Job `deploy-railway` с реальным деплоем
-  ![alt text](image-11.png)
+  <img width="529" height="465" alt="image" src="https://github.com/user-attachments/assets/12cf30a0-e41c-4ae0-8fc1-ce133bffd863" />
+
 - Staging environment настроен с URL: `https://course-project-blackbarashka-new-production.up.railway.app/docs#/`
 - Деплой на Railway использует секреты для аутентификации
 - CI run содержит шаги CD с успешным выполнением
