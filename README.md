@@ -87,6 +87,7 @@ Compose описывает реальное приложение с настро
 - Настроена матрица для тестирования на нескольких версиях Python: 3.11 и 3.12
 
     <img width="367" height="243" alt="image" src="https://github.com/user-attachments/assets/f3dbc9b4-f0b8-436d-93c7-05b9871a83cc" />
+    
 - Настроена матрица для тестирования на разных операционных системах (ubuntu-latest)
 - Линтинг и форматирование: ruff, black, isort
 - Pre-commit проверки запускаются в CI
@@ -115,8 +116,11 @@ Compose описывает реальное приложение с настро
 - Файл `.github/workflows/ci.yml`:
   - Настройка `concurrency`:
   <img width="332" height="52" alt="image" src="https://github.com/user-attachments/assets/be27c543-33e9-42e3-8aa8-58d55b753e2c" />
+  
   - Кэширование pip:
+  
   <img width="656" height="135" alt="image" src="https://github.com/user-attachments/assets/63f24f56-8469-49f6-ab4f-00f3e6f348d7" />
+  
   - Кэширование Docker-образов
 - Кэш ускоряет сборку при повторных запусках
 
@@ -177,8 +181,11 @@ Compose описывает реальное приложение с настро
 **Доказательства:**
 - Файл `.github/workflows/ci.yml`:
   - Job `deploy-staging` с mock deployment
+  - 
   <img width="530" height="391" alt="image" src="https://github.com/user-attachments/assets/d741d58c-9569-47f6-8284-777890d8576e" />
+  
   - Job `deploy-railway` с реальным деплоем
+  - 
   <img width="529" height="465" alt="image" src="https://github.com/user-attachments/assets/12cf30a0-e41c-4ae0-8fc1-ce133bffd863" />
 
 - Staging environment настроен с URL: `https://course-project-blackbarashka-new-production.up.railway.app/docs#/`
